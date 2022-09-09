@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +17,20 @@ namespace WpfZadanie10
     /// </summary>
     public partial class MainWindow : Window
     {
+        TelegramMessageClient client;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            client = new TelegramMessageClient(this);
+
+            logList.ItemsSource = client.BotMessageLog;
+        }
+
+        private void btnMsgSendClick(object sender, RoutedEventArgs e)
+        {
+            client.SendMessage(txtMsgSend.Text, TargetSend.Text);
         }
     }
 }
